@@ -1,5 +1,6 @@
 package simonetti.martin.tplectorrss;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements ClickItem {
 
     @Override
     public void click(int posicion) {
+        Intent i= new Intent(this, NoticiaActivity.class);
+        i.putExtra("url", "www.ole.com.ar");
+        startActivity(i);
         Log.d("Algo", String.valueOf(posicion));
     }
 }
