@@ -19,7 +19,7 @@ public class NoticiaActivity extends AppCompatActivity {
         WebView webView= (WebView) findViewById(R.id.wvNoticia);
         WebSettings webSettings= webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl("http://" + url);
+        webView.loadUrl(url);
     }
 
     @Override
