@@ -1,11 +1,15 @@
 package simonetti.martin.tplectorrss;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -15,10 +19,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private ArrayList<Noticia> listaNoticias;
     MyViewHolder holder;
     ClickItem objClick;
+    Handler colaMensajes;
 
-    public MyAdapter(ArrayList<Noticia> lista, ClickItem c){
+    public MyAdapter(ArrayList<Noticia> lista, ClickItem c, Handler h){
         listaNoticias= lista;
         objClick= c;
+        colaMensajes= h;
     }
 
     @Override
@@ -34,7 +40,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.tvFecha.setText(n.getFecha());
         holder.tvTitulo.setText(n.getTitulo());
         holder.tvDescripcion.setText(n.getDescripcion());
-        holder.ivNoticia.setImageResource(R.mipmap.ic_launcher);
+        if (n.getImagen() != null){
+            Bitmap bmp = BitmapFactory.decodeByteArray(n.getImagen(), 0, n.getImagen().length);
+            holder.ivNoticia.setImageBitmap(bmp);
+        } else {
+            if (n.getImagenPath() != null) {
+                Thread hiloImagen = new Thread(new HiloTraerDatos(n.getImagenPath(), colaMensajes, true, position));
+                hiloImagen.start();
+                //holder.ivNoticia.setImageResource(R.drawable.logo_rss);
+            }
+        }
     }
 
     @Override

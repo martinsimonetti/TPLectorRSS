@@ -24,7 +24,7 @@ public class ListenerMainActivity implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId()== R.id.btnRss){
             TextView tvRss= (TextView) act.findViewById(R.id.tvRss);
-            hiloDatos= new Thread(new HiloTraerDatos(tvRss.getText().toString(), colaMensajes));
+            hiloDatos= new Thread(new HiloTraerDatos(tvRss.getText().toString(), colaMensajes, false));
             hiloDatos.start();
             Log.d("tvRss", tvRss.getText().toString());
         }
