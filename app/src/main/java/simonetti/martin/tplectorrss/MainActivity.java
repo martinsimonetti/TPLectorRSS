@@ -20,6 +20,8 @@ import org.xmlpull.v1.XmlPullParser;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity implements ClickItem, Handler.Callback {
     ArrayList<Noticia> noticias;
@@ -32,16 +34,11 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
         setContentView(R.layout.activity_main);
 
         noticias = new ArrayList<Noticia>();
-        Noticia n= new Noticia();
-        n.setFecha("02/06/2016");
-        n.setTitulo("Ganó Boca");
-        n.setDescripcion("Goleó a Independiente 20.012 a 0");
-
-        noticias.add(n);
 
         RecyclerView recyclerView= (RecyclerView) findViewById(R.id.rvRss);
         colaMensajes= new Handler(this);
-        adapter= new MyAdapter(noticias, this, colaMensajes);
+        ExecutorService ex= Executors.newFixedThreadPool(3);
+        adapter= new MyAdapter(noticias, this, colaMensajes, ex);
 
         LinearLayoutManager linearLayout= new LinearLayoutManager(this);
         recyclerView.setAdapter(adapter);

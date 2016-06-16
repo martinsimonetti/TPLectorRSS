@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
 
 /**
  * Created by alumno on 02/06/2016.
@@ -20,11 +21,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     MyViewHolder holder;
     ClickItem objClick;
     Handler colaMensajes;
+    ExecutorService executorService;
 
-    public MyAdapter(ArrayList<Noticia> lista, ClickItem c, Handler h){
+    public MyAdapter(ArrayList<Noticia> lista, ClickItem c, Handler h, ExecutorService ex){
         listaNoticias= lista;
         objClick= c;
         colaMensajes= h;
+        executorService= ex;
     }
 
     @Override
@@ -47,8 +50,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
             if (n.getImagenPath() != null) {
                 holder.ivNoticia.setImageResource(R.drawable.logo_rss);
                 Thread hiloImagen = new Thread(new HiloTraerDatos(n.getImagenPath(), colaMensajes, true, position));
-                hiloImagen.start();
-                //holder.ivNoticia.setImageResource(R.drawable.logo_rss);
+                executorService.execute(hiloImagen);
             }
         }
     }
