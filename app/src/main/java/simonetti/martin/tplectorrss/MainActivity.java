@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
         Intent i= new Intent(this, NoticiaActivity.class);
         i.putExtra("url", n.getLink());
         startActivity(i);
-        Log.d("Algo", String.valueOf(posicion));
+        //Log.d("Algo", String.valueOf(posicion));
     }
 
     @Override
@@ -70,15 +70,12 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
                 Log.d("TamañoLista", String.valueOf(noticias.size()));
                 break;
             case 2:
-                Log.d("Main", "2");
+                //Log.d("Main", "2");
                 byte[] imagenDescargada= (byte[])msg.obj;
                 int posicion= msg.arg2;
-                Log.d("Posicion", String.valueOf(posicion));
+                //Log.d("Posicion", String.valueOf(posicion));
                 Noticia n= noticias.get(posicion);
                 n.setImagen(imagenDescargada);
-                /*Bitmap bmp = BitmapFactory.decodeByteArray(imagenDescargada, 0, imagenDescargada.length);
-                ImageView image = (ImageView) findViewById(R.id.ivNoticia);
-                image.setImageBitmap(bmp);*/
                 break;
         }
         adapter.notifyDataSetChanged();

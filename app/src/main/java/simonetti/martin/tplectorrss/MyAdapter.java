@@ -45,6 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
             holder.ivNoticia.setImageBitmap(bmp);
         } else {
             if (n.getImagenPath() != null) {
+                holder.ivNoticia.setImageResource(R.drawable.logo_rss);
                 Thread hiloImagen = new Thread(new HiloTraerDatos(n.getImagenPath(), colaMensajes, true, position));
                 hiloImagen.start();
                 //holder.ivNoticia.setImageResource(R.drawable.logo_rss);
