@@ -1,6 +1,9 @@
 package simonetti.martin.tplectorrss;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +13,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
     MyAdapter adapter;
     Handler colaMensajes;
     ExecutorService ex;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
         setContentView(R.layout.activity_main);
 
         noticias = new ArrayList<Noticia>();
+        preferences= getSharedPreferences("RssGuardadas", Context.MODE_PRIVATE);
+        Editor editor= preferences.edit();
+        editor.remove("");
+        editor.commit();
 
         RecyclerView recyclerView= (RecyclerView) findViewById(R.id.rvRss);
         colaMensajes= new Handler(this);
@@ -78,6 +87,27 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_lateral, menu);
+
+        Map preferencias= preferences.getAll();
+        String[] titulos= new String[5];
+        int i= 0;
+        for (Iterator it= preferencias.keySet().iterator(); it.hasNext();){
+            titulos[i]= (String) it.next();
+            i++;
+        }
+
+        MenuItem item1= menu.findItem(R.id.itRss1);
+        MenuItem item2= menu.findItem(R.id.itRss2);
+        MenuItem item3= menu.findItem(R.id.itRss3);
+        MenuItem item4= menu.findItem(R.id.itRss4);
+        MenuItem item5= menu.findItem(R.id.itRss5);
+
+        if (titulos[0]!= null) item1.setTitle(titulos[0]);
+        if (titulos[1]!= null) item2.setTitle(titulos[1]);
+        if (titulos[2]!= null) item3.setTitle(titulos[2]);
+        if (titulos[3]!= null) item4.setTitle(titulos[3]);
+        if (titulos[4]!= null) item5.setTitle(titulos[4]);
+
         return true;
     }
 
@@ -85,22 +115,23 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
     public boolean onOptionsItemSelected(MenuItem item) {
         String url= "";
         if (item.getItemId()== R.id.itRss1){
-            url= "http://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss";
+            url= preferences.getString(item.getTitle().toString(),"");
         }
         if (item.getItemId()== R.id.itRss2){
-            url= "http://www.telam.com.ar/rss2/ultimasnoticias.xml";
+            url= preferences.getString(item.getTitle().toString(),"");
         }
         if (item.getItemId()== R.id.itRss3){
-            url= "http://www.clarin.com/rss/lo-ultimo/";
+            url= preferences.getString(item.getTitle().toString(),"");
         }
         if (item.getItemId()== R.id.itRss4){
-            //url= "http://www.clarin.com/rss/lo-ultimo/";
+            url= preferences.getString(item.getTitle().toString(),"");
         }
         if (item.getItemId()== R.id.itRss5){
-            //url= "http://www.clarin.com/rss/lo-ultimo/";
+            url= preferences.getString(item.getTitle().toString(),"");
         }
         if (item.getItemId()== R.id.itAdministrar){
-            //url= "http://www.clarin.com/rss/lo-ultimo/";
+            DialogoRss drss= new DialogoRss();
+            drss.show(getFragmentManager(), "Cargar RSS");
         }
         if (!url.equals("")) {
             Thread hiloDatos = new Thread(new HiloTraerDatos(url, colaMensajes, false));
