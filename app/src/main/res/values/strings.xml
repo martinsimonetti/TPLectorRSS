@@ -2,4 +2,6 @@
     <string name="app_name">TPLectorRSS</string>
     <string name="tv_RSS">Ingrese la URL del RSS</string>
     <string name="btn_RSS">Leer</string>
+    <string name="item_rss">Sin RSS</string>
+    <string name="item_AdministrarRss">Modificar...</string>
 </resources>

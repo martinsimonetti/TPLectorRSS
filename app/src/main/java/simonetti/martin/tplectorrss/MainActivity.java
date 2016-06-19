@@ -1,8 +1,6 @@
 package simonetti.martin.tplectorrss;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +8,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.Xml;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import org.xmlpull.v1.XmlPullParser;
-
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
     ArrayList<Noticia> noticias;
     MyAdapter adapter;
     Handler colaMensajes;
+    ExecutorService ex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +33,14 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
 
         RecyclerView recyclerView= (RecyclerView) findViewById(R.id.rvRss);
         colaMensajes= new Handler(this);
-        ExecutorService ex= Executors.newFixedThreadPool(3);
+        ex= Executors.newFixedThreadPool(3);
         adapter= new MyAdapter(noticias, this, colaMensajes, ex);
 
         LinearLayoutManager linearLayout= new LinearLayoutManager(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayout);
 
-        ListenerMainActivity listener= new ListenerMainActivity(this, colaMensajes);
+        ListenerMainActivity listener= new ListenerMainActivity(this, colaMensajes, ex);
         Button btnLeer= (Button) findViewById(R.id.btnRss);
         btnLeer.setOnClickListener(listener);
     }
@@ -77,5 +73,39 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
         }
         adapter.notifyDataSetChanged();
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lateral, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String url= "";
+        if (item.getItemId()== R.id.itRss1){
+            url= "http://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss";
+        }
+        if (item.getItemId()== R.id.itRss2){
+            url= "http://www.telam.com.ar/rss2/ultimasnoticias.xml";
+        }
+        if (item.getItemId()== R.id.itRss3){
+            url= "http://www.clarin.com/rss/lo-ultimo/";
+        }
+        if (item.getItemId()== R.id.itRss4){
+            //url= "http://www.clarin.com/rss/lo-ultimo/";
+        }
+        if (item.getItemId()== R.id.itRss5){
+            //url= "http://www.clarin.com/rss/lo-ultimo/";
+        }
+        if (item.getItemId()== R.id.itAdministrar){
+            //url= "http://www.clarin.com/rss/lo-ultimo/";
+        }
+        if (!url.equals("")) {
+            Thread hiloDatos = new Thread(new HiloTraerDatos(url, colaMensajes, false));
+            ex.execute(hiloDatos);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -11,30 +11,29 @@
     tools:context="simonetti.martin.tplectorrss.MainActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/tvRss"
-            android:layout_width="wrap_content"
+            android:id="@+id/principal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/tv_RSS"
-            android:layout_weight="0.8"/>
-        <Button
-            android:id="@+id/btnRss"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_RSS"
-            android:layout_weight="0.2
-            "/>
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/tvRss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/tv_RSS"
+                android:layout_weight="0.8"/>
+            <Button
+                android:id="@+id/btnRss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_RSS"
+                android:layout_weight="0.2"/>
+        </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvRss"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical">
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvRss"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+        </android.support.v7.widget.RecyclerView>
 </LinearLayout>
