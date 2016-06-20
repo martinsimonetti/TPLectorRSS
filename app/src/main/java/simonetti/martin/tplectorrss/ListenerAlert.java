@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -45,6 +48,10 @@ public class ListenerAlert implements DialogInterface.OnClickListener {
                 editor.putString(etRss4Titulo.getText().toString(), etRss4Url.getText().toString());
                 editor.putString(etRss5Titulo.getText().toString(), etRss5Url.getText().toString());
                 editor.commit();
+
+                Message msg= new Message();
+                msg.arg1= 3;
+                MainActivity.colaMensajes.sendMessage(msg);
                 break;
             case AlertDialog.BUTTON_NEUTRAL:
                 break;

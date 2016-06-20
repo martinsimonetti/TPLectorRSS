@@ -14,9 +14,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -25,7 +25,7 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity implements ClickItem, Handler.Callback {
     ArrayList<Noticia> noticias;
     MyAdapter adapter;
-    Handler colaMensajes;
+    static Handler colaMensajes;
     ExecutorService ex;
     SharedPreferences preferences;
 
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
                 noticias.clear();
                 noticias.addAll((ArrayList<Noticia>) msg.obj);
                 Log.d("TamañoLista", String.valueOf(noticias.size()));
+                adapter.notifyDataSetChanged();
                 break;
             case 2:
                 //Log.d("Main", "2");
@@ -78,9 +79,31 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
                 //Log.d("Posicion", String.valueOf(posicion));
                 Noticia n= noticias.get(posicion);
                 n.setImagen(imagenDescargada);
+                adapter.notifyDataSetChanged();
                 break;
+            case 3:
+                Log.d("MainActivity", "Actualizar Menú");
+                /*Map preferencias= preferences.getAll();
+                String[] titulos= new String[5];
+                int i= 0;
+                for (Iterator it= preferencias.keySet().iterator(); it.hasNext();){
+                    titulos[i]= (String) it.next();
+                    i++;
+                }
+
+                Button item1= (Button) findViewById(R.id.btnRss);
+                MenuItem item2= (MenuItem) findViewById(R.id.itRss2);
+                MenuItem item3= (MenuItem) findViewById(R.id.itRss3);
+                MenuItem item4= (MenuItem) findViewById(R.id.itRss4);
+                MenuItem item5= (MenuItem) findViewById(R.id.itRss5);
+
+                if (titulos[0]!= null) item1.setText(titulos[0]);
+                if (titulos[1]!= null) item2.setTitle(titulos[1]);
+                if (titulos[2]!= null) item3.setTitle(titulos[2]);
+                if (titulos[3]!= null) item4.setTitle(titulos[3]);
+                if (titulos[4]!= null) item5.setTitle(titulos[4]);
+                break;*/
         }
-        adapter.notifyDataSetChanged();
         return false;
     }
 
@@ -114,24 +137,18 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         String url= "";
-        if (item.getItemId()== R.id.itRss1){
-            url= preferences.getString(item.getTitle().toString(),"");
-        }
-        if (item.getItemId()== R.id.itRss2){
-            url= preferences.getString(item.getTitle().toString(),"");
-        }
-        if (item.getItemId()== R.id.itRss3){
-            url= preferences.getString(item.getTitle().toString(),"");
-        }
-        if (item.getItemId()== R.id.itRss4){
-            url= preferences.getString(item.getTitle().toString(),"");
-        }
-        if (item.getItemId()== R.id.itRss5){
-            url= preferences.getString(item.getTitle().toString(),"");
-        }
-        if (item.getItemId()== R.id.itAdministrar){
-            DialogoRss drss= new DialogoRss();
-            drss.show(getFragmentManager(), "Cargar RSS");
+
+        switch (item.getItemId()){
+            case R.id.itRss1:
+            case R.id.itRss2:
+            case R.id.itRss3:
+            case R.id.itRss4:
+            case R.id.itRss5:
+                url= preferences.getString(item.getTitle().toString(),"");
+                break;
+            case R.id.itAdministrar:
+                DialogoRss drss= new DialogoRss();
+                drss.show(getFragmentManager(), "Cargar RSS");
         }
         if (!url.equals("")) {
             Thread hiloDatos = new Thread(new HiloTraerDatos(url, colaMensajes, false));

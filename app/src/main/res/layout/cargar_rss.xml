@@ -11,12 +11,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
+            android:ems="5"
+            android:inputType="textImeMultiLine"
             android:hint="Nombre"/>
         <EditText
             android:id="@+id/etRss1Url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
+            android:ems="5"
+            android:inputType="textImeMultiLine"
             android:hint="URL del RSS"/>
     </LinearLayout>
     <LinearLayout
@@ -28,12 +32,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
+            android:ems="5"
+            android:inputType="textImeMultiLine"
             android:hint="Nombre"/>
         <EditText
             android:id="@+id/etRss2Url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
+            android:ems="5"
+            android:inputType="textImeMultiLine"
             android:hint="URL del RSS"/>
     </LinearLayout>
     <LinearLayout
@@ -45,12 +53,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
+            android:ems="5"
+            android:inputType="textImeMultiLine"
             android:hint="Nombre"/>
         <EditText
             android:id="@+id/etRss3Url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
+            android:ems="5"
+            android:inputType="textImeMultiLine"
             android:hint="URL del RSS"/>
     </LinearLayout>
     <LinearLayout
@@ -62,12 +74,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
+            android:ems="5"
+            android:inputType="textImeMultiLine"
             android:hint="Nombre"/>
         <EditText
             android:id="@+id/etRss4Url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
+            android:ems="5"
+            android:inputType="textImeMultiLine"
             android:hint="URL del RSS"/>
     </LinearLayout>
     <LinearLayout
@@ -79,12 +95,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
+            android:ems="5"
+            android:inputType="textImeMultiLine"
             android:hint="Nombre"/>
         <EditText
             android:id="@+id/etRss5Url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
+            android:ems="5"
+            android:inputType="textImeMultiLine"
             android:hint="URL del RSS"/>
     </LinearLayout>
 </LinearLayout>

@@ -62,7 +62,6 @@ public class DialogoRss extends DialogFragment {
         ListenerAlert  l= new ListenerAlert(v, getActivity());
         builder.setPositiveButton("Guardar", l);
         builder.setNeutralButton("Cancelar", l);
-
         AlertDialog ad= builder.create();
 
         return ad;
