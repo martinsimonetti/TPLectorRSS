@@ -4,4 +4,9 @@
     <string name="btn_RSS">Leer</string>
     <string name="item_rss">Sin RSS</string>
     <string name="item_AdministrarRss">Modificar...</string>
+    <string name="et_nombreRss">Nombre</string>
+    <string name="et_direccionRss">URL del RSS</string>
+    <string name="btn_guardar">Guardar</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="RSS_Favoritas">RSS Favoritas</string>
 </resources>

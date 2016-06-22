@@ -56,12 +56,12 @@ public class DialogoRss extends DialogFragment {
         if (rss[4][1]!= null) etRss5Url.setText(rss[4][1]);
 
         AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
-        builder.setTitle("RSS Favoritas");
+        builder.setTitle(getText(R.string.RSS_Favoritas));
         builder.setView(v);
 
         ListenerAlert  l= new ListenerAlert(v, getActivity());
-        builder.setPositiveButton("Guardar", l);
-        builder.setNeutralButton("Cancelar", l);
+        builder.setPositiveButton(getString(R.string.btn_guardar), l);
+        builder.setNeutralButton(getString(R.string.btn_cancelar), l);
         AlertDialog ad= builder.create();
 
         return ad;
