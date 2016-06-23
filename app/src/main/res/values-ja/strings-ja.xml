@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RRSリーダーのTP</string>
+    <string name="tv_RSS">ここにURL書いてください</string>
+    <string name="btn_RSS">リード</string>
+    <string name="item_rss">RSSいない</string>
+    <string name="item_AdministrarRss">モディファイ</string>
+    <string name="et_nombreRss">名前</string>
+    <string name="et_direccionRss">RSSのURL</string>
+    <string name="btn_guardar">セーブ</string>
+    <string name="btn_cancelar">キャンセル</string>
+    <string name="RSS_Favoritas">好きなRSS</string>
+</resources>

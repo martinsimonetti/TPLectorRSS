@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TPRSSReader</string>
+    <string name="tv_RSS">Insert URL of the RSS</string>
+    <string name="btn_RSS">Read</string>
+    <string name="item_rss">Free</string>
+    <string name="item_AdministrarRss">Update...</string>
+    <string name="et_nombreRss">Name</string>
+    <string name="et_direccionRss">URL of the RSS</string>
+    <string name="btn_guardar">Save</string>
+    <string name="btn_cancelar">Cancel</string>
+    <string name="RSS_Favoritas">Favorites RSS</string>
+</resources>

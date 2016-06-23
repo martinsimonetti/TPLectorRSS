@@ -65,16 +65,15 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
                 noticias.clear();
                 noticias.addAll((ArrayList<Noticia>) msg.obj);
                 Log.d("TamañoLista", String.valueOf(noticias.size()));
-                adapter.notifyDataSetChanged();
                 break;
             case 2:
                 byte[] imagenDescargada= (byte[])msg.obj;
                 int posicion= msg.arg2;
                 Noticia n= noticias.get(posicion);
                 n.setImagen(imagenDescargada);
-                adapter.notifyDataSetChanged();
                 break;
         }
+        adapter.notifyDataSetChanged();
         return false;
     }
 
@@ -97,5 +96,11 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStop() {
+        ex.shutdown();
+        super.onStop();
     }
 }

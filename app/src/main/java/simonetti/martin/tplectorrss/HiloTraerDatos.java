@@ -45,11 +45,10 @@ public class HiloTraerDatos implements Runnable {
                 String strXml = conexion.getStrDataByGET();
 
                 XmlPullParser parser = Xml.newPullParser();
-                Noticia n = null;
+                Noticia n = new Noticia();
                 try {
                     parser.setInput(new StringReader(strXml));
                     int event = parser.getEventType();
-                    n = new Noticia();
                     while (event != XmlPullParser.END_DOCUMENT) {
                         //Log.d("Evento", String.valueOf(event));
                         switch (event) {
