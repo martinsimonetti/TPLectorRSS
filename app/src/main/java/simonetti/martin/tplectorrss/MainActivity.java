@@ -14,11 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.EditText;
-
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -60,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
         Intent i= new Intent(this, NoticiaActivity.class);
         i.putExtra("url", n.getLink());
         startActivity(i);
-        //Log.d("Algo", String.valueOf(posicion));
     }
 
     @Override
@@ -73,36 +68,12 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
                 adapter.notifyDataSetChanged();
                 break;
             case 2:
-                //Log.d("Main", "2");
                 byte[] imagenDescargada= (byte[])msg.obj;
                 int posicion= msg.arg2;
-                //Log.d("Posicion", String.valueOf(posicion));
                 Noticia n= noticias.get(posicion);
                 n.setImagen(imagenDescargada);
                 adapter.notifyDataSetChanged();
                 break;
-            case 3:
-                Log.d("MainActivity", "Actualizar Menú");
-                /*Map preferencias= preferences.getAll();
-                String[] titulos= new String[5];
-                int i= 0;
-                for (Iterator it= preferencias.keySet().iterator(); it.hasNext();){
-                    titulos[i]= (String) it.next();
-                    i++;
-                }
-
-                Button item1= (Button) findViewById(R.id.btnRss);
-                MenuItem item2= (MenuItem) findViewById(R.id.itRss2);
-                MenuItem item3= (MenuItem) findViewById(R.id.itRss3);
-                MenuItem item4= (MenuItem) findViewById(R.id.itRss4);
-                MenuItem item5= (MenuItem) findViewById(R.id.itRss5);
-
-                if (titulos[0]!= null) item1.setText(titulos[0]);
-                if (titulos[1]!= null) item2.setTitle(titulos[1]);
-                if (titulos[2]!= null) item3.setTitle(titulos[2]);
-                if (titulos[3]!= null) item4.setTitle(titulos[3]);
-                if (titulos[4]!= null) item5.setTitle(titulos[4]);
-                break;*/
         }
         return false;
     }
@@ -110,49 +81,20 @@ public class MainActivity extends AppCompatActivity implements ClickItem, Handle
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_lateral, menu);
-
-        Map preferencias= preferences.getAll();
-        String[] titulos= new String[5];
-        int i= 0;
-        for (Iterator it= preferencias.keySet().iterator(); it.hasNext();){
-            titulos[i]= (String) it.next();
-            i++;
-        }
-
-        MenuItem item1= menu.findItem(R.id.itRss1);
-        MenuItem item2= menu.findItem(R.id.itRss2);
-        MenuItem item3= menu.findItem(R.id.itRss3);
-        MenuItem item4= menu.findItem(R.id.itRss4);
-        MenuItem item5= menu.findItem(R.id.itRss5);
-
-        if (titulos[0]!= null) item1.setTitle(titulos[0]);
-        if (titulos[1]!= null) item2.setTitle(titulos[1]);
-        if (titulos[2]!= null) item3.setTitle(titulos[2]);
-        if (titulos[3]!= null) item4.setTitle(titulos[3]);
-        if (titulos[4]!= null) item5.setTitle(titulos[4]);
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String url= "";
-
         switch (item.getItemId()){
-            case R.id.itRss1:
-            case R.id.itRss2:
-            case R.id.itRss3:
-            case R.id.itRss4:
-            case R.id.itRss5:
-                url= preferences.getString(item.getTitle().toString(),"");
-                break;
             case R.id.itAdministrar:
-                DialogoRss drss= new DialogoRss();
-                drss.show(getFragmentManager(), "Cargar RSS");
-        }
-        if (!url.equals("")) {
-            Thread hiloDatos = new Thread(new HiloTraerDatos(url, colaMensajes, false));
-            ex.execute(hiloDatos);
+                DialogoRss dRss= new DialogoRss();
+                dRss.show(getFragmentManager(), "Cargar RSS");
+                break;
+            case R.id.itFavoritos:
+                DialogoMenu dMenu= new DialogoMenu();
+                dMenu.show(getFragmentManager(), "RSS Favoritos");
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

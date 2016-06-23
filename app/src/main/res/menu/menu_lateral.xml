@@ -2,41 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
         <item
-            android:id="@+id/itRss1"
-            android:orderInCategory="1"
-            app:showAsAction="never"
-            android:title="@string/item_rss">
-        </item>
-        <item
-            android:id="@+id/itRss2"
-            android:orderInCategory="2"
-            app:showAsAction="never"
-            android:title="@string/item_rss">
-        </item>
-        <item
-            android:id="@+id/itRss3"
-            android:orderInCategory="3"
-            app:showAsAction="never"
-            android:title="@string/item_rss">
-        </item>
-        <item
-            android:id="@+id/itRss4"
-            android:orderInCategory="4"
-            app:showAsAction="never"
-            android:title="@string/item_rss">
-        </item>
-        <item
-            android:id="@+id/itRss5"
-            android:orderInCategory="5"
-            app:showAsAction="never"
-            android:title="@string/item_rss">
-        </item>
-        <item
             android:id="@+id/itAdministrar"
-            android:orderInCategory="6"
+            android:orderInCategory="1"
             app:showAsAction="always"
             android:icon="@android:drawable/ic_input_add"
             android:title="@string/item_AdministrarRss">
+        </item>
+        <item
+            android:id="@+id/itFavoritos"
+            android:orderInCategory="2"
+            app:showAsAction="always"
+            android:icon="@android:drawable/btn_star_big_on"
+            android:title="@string/RSS_Favoritas">
         </item>
 </menu>
 
